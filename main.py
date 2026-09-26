@@ -12,9 +12,12 @@ def greet(name=None):
 
 def main(argv=None):
     """Run the command-line interface and return an exit code."""
-    args = sys.argv[1:] if argv is None else argv
+    args = list(sys.argv[1:] if argv is None else argv)
+    shout = "--shout" in args
+    args = [arg for arg in args if arg != "--shout"]
     name = " ".join(args) if args else None
-    print(greet(name))
+    message = greet(name)
+    print(message.upper() if shout else message)
     return 0
 
 
